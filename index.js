@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
     '\n');
 });
 
-client.query('CREATE TABLE IF NOT EXISTS users(name varchar, PRIMARY KEY (id))');
+client.query('CREATE TABLE IF NOT EXISTS users(id integer not null, name varchar, PRIMARY KEY (id))');
 
 // API:
 // GET users
