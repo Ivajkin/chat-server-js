@@ -19,6 +19,19 @@ var app = express();
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
+  
+  res.send('API:\n' +
+    'GET users\n' +
+    'POST users {name: \'Anton\'}\n' +
+    '\n' +
+    'GET channels/:channel_id/messages\n' +
+    'POST messages {text: \'Message example\', user_id: 1, object_of_concern_id: 1}\n' +
+    '\n' +
+    'GET users/:user_id/active-channels\n' +
+    'GET channels/:channel_id/object-of-concern\n' +
+    '\n' +
+    'POST objects_of_concern {uri: \'/buildings/white-garden\', image_url: \'https://s3.aws.com/aeuacaea.jpg\', name: \'White Garden\'}\n' +
+    '\n');
 });
 
 app.listen(process.env.PORT || 5000);
