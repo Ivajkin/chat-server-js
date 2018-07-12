@@ -54,7 +54,7 @@ app.get('/users', function (req, res1) {
 });
 // POST users {name: 'Anton'}
 app.post('/users', function (req, res1) {
-
+  console.log({'req.body': req.body});
   client.query('insert into users values($1::text)', [req.body.name], (err, res2) => {
     res1.send(JSON.stringify({error: err, result: res2}));
   });
