@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 app.get('/', function (req, res) {
   // res.send('Hello World!');
-  
+
   res.send('<pre>API:\n' +
     'GET users\n' +
     'POST users {name: \'Anton\'}\n' +
@@ -39,16 +39,17 @@ app.get('/', function (req, res) {
     '\n</pre>');
 });
 
-if(true) {
+const _DROP = true;
+if(_DROP) {
   client.query('drop TABLE users');
   client.query('drop TABLE messages');
-  client.query('drop TABLE channel');
+  client.query('drop TABLE channels');
   client.query('drop TABLE raisondetre');
 }
 
 client.query('CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name varchar)');
 client.query('CREATE TABLE IF NOT EXISTS messages(text varchar, user_id integer, channel_id integer, created_at: timestamp)');
-client.query('CREATE TABLE IF NOT EXISTS channel(id SERIAL PRIMARY KEY, name varchar, raisondetre integer)');
+client.query('CREATE TABLE IF NOT EXISTS channels(id SERIAL PRIMARY KEY, name varchar, raisondetre integer)');
 client.query('CREATE TABLE IF NOT EXISTS raisondetre(id SERIAL PRIMARY KEY, name varchar, image_url varchar, uri varchar)');
 
 // API:
