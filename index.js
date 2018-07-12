@@ -10,7 +10,7 @@ client.connect();
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
   console.log(err ? err.stack : res.rows[0].message) // Hello World!
-  client.end()
+  // client.end()
 });
 
 
@@ -33,5 +33,27 @@ app.get('/', function (req, res) {
     'POST objects_of_concern {uri: \'/buildings/white-garden\', image_url: \'https://s3.aws.com/aeuacaea.jpg\', name: \'White Garden\'}\n' +
     '\n');
 });
+
+// API:
+// GET users
+app.get('/users', function (req, res) {
+
+  client.query('SELECT * from users', (err, res) => {
+    res.send(JSON.stringify(res.rows));
+  });
+});
+// POST users {name: 'Anton'}
+//
+// GET channels/:channel_id/messages
+// POST messages {text: 'Message example', user_id: 1, object_of_concern_id: 1}
+//
+// GET users/:user_id/active-channels
+// GET channels/:channel_id/object-of-concern
+//
+// POST objects_of_concern {uri: '/buildings/white-garden', image_url: 'https://s3.aws.com/aeuacaea.jpg', name: 'White Garden'}
+//
+
+
+
 
 app.listen(process.env.PORT || 5000);
