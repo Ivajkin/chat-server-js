@@ -20,7 +20,7 @@ var app = express();
 app.get('/', function (req, res) {
   res.send('Hello World!');
   
-  res.send('API:\n' +
+  res.send('<pre>API:\n' +
     'GET users\n' +
     'POST users {name: \'Anton\'}\n' +
     '\n' +
@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
     'GET channels/:channel_id/object-of-concern\n' +
     '\n' +
     'POST objects_of_concern {uri: \'/buildings/white-garden\', image_url: \'https://s3.aws.com/aeuacaea.jpg\', name: \'White Garden\'}\n' +
-    '\n');
+    '\n</pre>');
 });
 
 client.query('CREATE TABLE IF NOT EXISTS users(id integer not null, name varchar, PRIMARY KEY (id))');
