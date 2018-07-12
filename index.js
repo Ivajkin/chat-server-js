@@ -39,6 +39,13 @@ app.get('/', function (req, res) {
     '\n</pre>');
 });
 
+if(true) {
+  client.query('drop TABLE users');
+  client.query('drop TABLE messages');
+  client.query('drop TABLE channel');
+  client.query('drop TABLE raisondetre');
+}
+
 client.query('CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name varchar)');
 client.query('CREATE TABLE IF NOT EXISTS messages(text varchar, user_id integer, channel_id integer, created_at: timestamp)');
 client.query('CREATE TABLE IF NOT EXISTS channel(id SERIAL PRIMARY KEY, name varchar, raisondetre integer)');
