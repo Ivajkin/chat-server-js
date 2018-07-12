@@ -48,7 +48,13 @@ app.get('/users', function (req, res1) {
   });
 });
 // POST users {name: 'Anton'}
-//
+app.get('/users', function (req, res1) {
+
+  client.query('insert into users values($1::text)', [req.body.name], (err, res2) => {
+    res1.send(JSON.stringify({error: err, result: res2}));
+  });
+});
+
 // GET channels/:channel_id/messages
 // POST messages {text: 'Message example', user_id: 1, object_of_concern_id: 1}
 //
