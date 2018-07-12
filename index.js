@@ -36,10 +36,10 @@ app.get('/', function (req, res) {
 
 // API:
 // GET users
-app.get('/users', function (req, res) {
+app.get('/users', function (req, res1) {
 
-  client.query('SELECT * from users', (err, res) => {
-    res.send(JSON.stringify(res.rows));
+  client.query('SELECT * from users', (err, res2) => {
+    res1.send(JSON.stringify(res2.rows));
   });
 });
 // POST users {name: 'Anton'}
