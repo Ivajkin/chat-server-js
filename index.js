@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
     '\n</pre>');
 });
 
-const _DROP = false;
+const _DROP = true;
 if(_DROP) {
   client.query('drop TABLE users');
   client.query('drop TABLE messages');
@@ -47,10 +47,10 @@ if(_DROP) {
   client.query('drop TABLE raisondetre');
 }
 
-client.query('CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name varchar)');
+client.query('CREATE TABLE IF NOT EXISTS users(id integer PRIMARY KEY DEFAULT nextval(\'serial\'), name varchar)');
 client.query('CREATE TABLE IF NOT EXISTS messages(text varchar, user_id integer, channel_id integer, created_at: timestamp)');
-client.query('CREATE TABLE IF NOT EXISTS channels(id SERIAL PRIMARY KEY, name varchar, raisondetre integer)');
-client.query('CREATE TABLE IF NOT EXISTS raisondetre(id SERIAL PRIMARY KEY, name varchar, image_url varchar, uri varchar)');
+client.query('CREATE TABLE IF NOT EXISTS channels(id integer PRIMARY KEY DEFAULT nextval(\'serial\'), name varchar, raisondetre integer)');
+client.query('CREATE TABLE IF NOT EXISTS raisondetre(id integer PRIMARY KEY DEFAULT nextval(\'serial\'), name varchar, image_url varchar, uri varchar)');
 
 // API:
 // GET users
