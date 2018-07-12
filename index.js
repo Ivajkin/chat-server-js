@@ -35,6 +35,9 @@ app.get('/', function (req, res) {
 });
 
 client.query('CREATE TABLE IF NOT EXISTS users(id integer not null, name varchar, PRIMARY KEY (id))');
+client.query('CREATE TABLE IF NOT EXISTS messages(text varchar, user_id integer, channel_id integer, created_at: timestamp)');
+client.query('CREATE TABLE IF NOT EXISTS channel(id integer not null, name varchar, raisondetre integer, PRIMARY KEY (id))');
+client.query('CREATE TABLE IF NOT EXISTS raisondetre(id integer not null, name varchar, image_url varchar, uri varchar, PRIMARY KEY (id))');
 
 // API:
 // GET users
