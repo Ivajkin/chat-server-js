@@ -36,10 +36,12 @@ app.get('/', function (req, res) {
     'GET channels/:channel_id/object-of-concern\n' +
     '\n' +
     'POST objects_of_concern {uri: \'/buildings/white-garden\', image_url: \'https://s3.aws.com/aeuacaea.jpg\', name: \'White Garden\'}\n' +
+    '\n' +
+    'GET sql {query: \'INSERT INTO users(name, email) VALUES(\'name\', \'email@email.com\') RETURNING *\'}\n' +
     '\n</pre>');
 });
 
-const _DROP = true;
+const _DROP = false;
 if(_DROP) {
   client.query('drop TABLE users');
   client.query('drop TABLE messages');
@@ -73,6 +75,15 @@ app.post('/users', function (req, res1) {
     } else {
       console.log(res.rows[0])
     }
+  });
+});
+
+app.get('/sql', function (req, res1) {
+  console.log({'req.body': req.body});
+  const text = req.body.query;
+
+  client.query(text, (err, res2) => {
+    res1.send(JSON.stringify({error: err, result: res2}));
   });
 });
 
