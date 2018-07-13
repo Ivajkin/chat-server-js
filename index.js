@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
     '\n</pre>');
 });
 
-const _DROP = false;
+const _DROP = true;
 if(_DROP) {
   client.query('drop TABLE users');
   client.query('drop TABLE messages');
@@ -47,7 +47,7 @@ if(_DROP) {
   client.query('drop TABLE raisondetre');
 }
 
-client.query('CREATE TABLE IF NOT EXISTS users(id BIGSERIAL PRIMARY KEY, name varchar)');
+client.query('CREATE TABLE IF NOT EXISTS users(id BIGSERIAL PRIMARY KEY, name varchar, email varchar)');
 client.query('CREATE TABLE IF NOT EXISTS messages(text varchar, user_id integer, channel_id integer, created_at: timestamp)');
 client.query('CREATE TABLE IF NOT EXISTS channels(id BIGSERIAL PRIMARY KEY, name varchar, raisondetre integer)');
 client.query('CREATE TABLE IF NOT EXISTS raisondetre(id BIGSERIAL PRIMARY KEY, name varchar, image_url varchar, uri varchar)');
@@ -63,8 +63,16 @@ app.get('/users', function (req, res1) {
 // POST users {name: 'Anton'}
 app.post('/users', function (req, res1) {
   console.log({'req.body': req.body});
-  client.query('insert into users (name) values("' + req.body.name + '")', (err, res2) => {
+  const text = 'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *';
+  const values = [req.body.name];
+
+  client.query(text, values, (err, res2) => {
     res1.send(JSON.stringify({error: err, result: res2}));
+    if (err) {
+      console.log(err.stack)
+    } else {
+      console.log(res.rows[0])
+    }
   });
 });
 
