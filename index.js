@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
     '\n</pre>');
 });
 
-const _DROP = true;
+const _DROP = false;
 if(_DROP) {
   client.query('drop TABLE users');
   client.query('drop TABLE messages');
