@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
     '\n' +
     'POST objects_of_concern {uri: \'/buildings/white-garden\', image_url: \'https://s3.aws.com/aeuacaea.jpg\', name: \'White Garden\'}\n' +
     '\n' +
-    'GET sql {query: \'INSERT INTO users(name, email) VALUES(\'name\', \'email@email.com\') RETURNING *\'}\n' +
+    'POST sql {query: \'INSERT INTO users(name, email) VALUES(\'name\', \'email@email.com\') RETURNING *\'}\n' +
     '\n</pre>');
 });
 
@@ -78,7 +78,7 @@ app.post('/users', function (req, res1) {
   });
 });
 
-app.get('/sql', function (req, res1) {
+app.post('/sql', function (req, res1) {
   console.log({'req.body': req.body});
   const text = req.body.query;
 
