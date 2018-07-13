@@ -66,7 +66,7 @@ app.get('/users', function (req, res1) {
 app.post('/users', function (req, res1) {
   console.log({'req.body': req.body});
   const text = 'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *';
-  const values = [req.body.name];
+  const values = [req.body.name, req.body.email];
 
   client.query(text, values, (err, res2) => {
     res1.send(JSON.stringify({error: err, result: res2}));
